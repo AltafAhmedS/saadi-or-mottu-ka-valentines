@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine’s Day, My Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d1a24;
+            background: linear-gradient(135deg, #fff5f9 0%, #fff0f6 50%, #ffeef4 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .glow {
+            text-shadow: 0 0 12px rgba(255, 77, 109, 0.35),
+                         0 0 24px rgba(255, 77, 109, 0.20);
+        }
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        h1, h2 { font-family: 'Dancing Script', cursive; }
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #hero h1 {
+            font-size: 4.8rem;
+            animation: pulse 2.8s infinite;
+            color: #ff4d6d;
+        }
+        #hero h2 {
+            font-size: 3.2rem;
+            color: #c9184a;
+            margin-top: 20px;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+        #love-letter {
+            background: rgba(255, 250, 252, 0.78);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            padding: 50px 40px;
+            box-shadow: 0 12px 60px rgba(255, 77, 109, 0.12);
+            border: 1px solid rgba(255, 77, 109, 0.15);
+            animation: glow-border 7s infinite alternate;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        @keyframes glow-border {
+            0% { box-shadow: 0 12px 60px rgba(255,77,109,0.10); }
+            100% { box-shadow: 0 18px 80px rgba(201,24,74,0.18); }
+        }
+        #love-letter p {
+            font-size: 1.28rem;
+            line-height: 1.95;
+            margin-bottom: 28px;
+            color: #3a1f2c;
+        }
+        .highlight { color: #ff4d6d; font-weight: 600; }
+
+        #typewriter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #c9184a;
+            margin-bottom: 35px;
+        }
+
+        #memories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .memory-card {
+            background: rgba(255, 250, 252, 0.72);
+            backdrop-filter: blur(12px);
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 8px 35px rgba(255,77,109,0.08);
+            text-align: left;
+            border: 1px solid rgba(255,77,109,0.12);
+            color: #3a1f2c;
+        }
+        .memory-card h3 {
+            font-size: 1.8rem;
+            color: #ff4d6d;
+            margin-bottom: 14px;
+        }
+
+        #question { margin: 90px 0; }
+        #question h2 {
+            font-size: 3.6rem;
+            color: #c9184a;
+            margin-bottom: 60px;
+        }
+
+        .button {
+            padding: 18px 60px;
+            font-size: 1.7rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            margin: 0 30px;
+        }
+        #yes-btn {
+            background: #ff4d6d;
+            color: white;
+        }
+        #yes-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 35px rgba(255,77,109,0.7);
+        }
+        #no-btn {
+            background: rgba(255,77,109,0.15);
+            color: #c9184a;
+        }
+
+        #celebration {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,245,250,0.94);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        #celebration-message {
+            font-size: 4rem;
+            color: #ff4d6d;
+            text-align: center;
+            animation: fadeIn 2s;
+            margin-bottom: 40px;
+        }
+        @keyframes fadeIn { from { opacity:0; transform: scale(0.7); } to { opacity:1; transform: scale(1); } }
+
+        /* Flying lovely emojis – always visible in background */
+        .flying-emoji {
+            position: absolute;
+            font-size: 2.2rem;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            animation: floatLove 16s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatLove {
+            0%   { opacity: 0; transform: translateY(30vh) scale(0.6) rotate(0deg); }
+            15%  { opacity: 0.95; transform: translateY(0) scale(1.15) rotate(25deg); }
+            85%  { opacity: 0.95; }
+            100% { opacity: 0; transform: translateY(-140vh) scale(0.8) rotate(900deg); }
+        }
+
+        .flying-emoji.drift {
+            animation: floatLoveDrift 19s linear forwards;
+        }
+
+        @keyframes floatLoveDrift {
+            0%   { opacity: 0; transform: translate(15vw, 40vh) scale(0.7) rotate(-15deg); }
+            10%  { opacity: 0.9; transform: translate(10vw, 5vh) scale(1.2) rotate(30deg); }
+            90%  { opacity: 0.9; }
+            100% { opacity: 0; transform: translate(-30vw, -150vh) scale(0.9) rotate(-1200deg); }
+        }
+
+        #countdown {
+            font-size: 1.7rem;
+            color: #c9184a;
+            margin-top: 35px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.5);
+            padding: 10px 24px;
+            border-radius: 40px;
+            backdrop-filter: blur(6px);
+        }
+
+        #audio-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+        }
+        #play-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 3.5rem; }
+            #hero h2 { font-size: 2.6rem; }
+            #question h2 { font-size: 2.8rem; }
+            .button { font-size: 1.4rem; padding: 14px 45px; margin: 15px; }
+            section { padding: 55px 18px; }
+            #love-letter { padding: 45px 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1 class="glow">Happy Valentine’s Day, mottu 💖</h1>
+        <h2 class="glow">Saadi ki kaki mottu😋🫂🫢💞</h2>
+        <div id="countdown"></div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section id="love-letter">
+        <p id="typewriter"></p>
+        <p>Sirf aajkal hi din ni MN har saal har month har din apko special feel krwaunga aajkal din to bahana Hy apny Pyar ko express krny ka bssss kabhi kabhaar galtiyan hojati hyn per hum Sath Reh kr sab Sahi kryngy🥺💋💞💕🫂Orr aajka din Sirf MN apky Sath guzarna Chahta tha per ye mumkin nhi Hy 👀🫢 but it's okkhhayyy hum ek dusry Sy durrr rehh kr v Pyar Sy rahyngy achy Sy rahyngy ek na ek din ye dooriyan khtm hojayengi 👀😋 fir donon Sath rahyngy Pyar Sy hehhehe bss itna hi Kehna tha baaki some kisseeessss for youuu muuwwaahhh 💋💋🫂 Meri Janam 💋🫂😋</p>
+      </section>
+
+    <!-- Memory Section -->
+    <section id="memories">
+        <div class="memory-card">
+            <h3>The Day We Had An Eyecontact</h3>
+            <p>Mujhy aaj v yad Hy humara first eye contact👀 jab i8 ki wo Gali MN AP car KY Sath khari thi or MN side Sy guzra tha horn diya to apny dekha Meri trf Meri Zindagi ki best feeling thi wo😭💕🫠💓💝💋👀hua to Kuch second KY Liye tha per wo hum donon KY Liye special Hy ik 🫢🫂🫠💓💝💋</p>
+        </div>
+        <div class="memory-card">
+            <h3>Day you said i love you </h3>
+            <p>30th of December 😭💝jab apny Raat ko mujhy kissiii diii first time I feel so happy that day 😭😭😭💕best feeling ever kunky apni pasandida aurat Sy kissii Lena hyyeeee khushiiii 😭😭😭💋🫢💞🫂
+Or agli subha ko apny apn Pyar express Kiya ahmmm 🫢💞💋🎀💕💝💓🫠
+.</p>
+        </div>
+        <div class="memory-card">
+            <h3>Our 8th Month</h3>
+            <p>We have completed 8 months together 🫂 4th of July day Friday best day ever in my life k mny apko txt Kiya 💋🫢💞 <3. 🌟</p>
+        </div>
+        <div class="memory-card">
+            <h3>My Forever Promise</h3>
+            <p>Mny ye promise boht Baar kia Hy or aaj v krta hu k MN hamesha hamesha apka Sath Dunga kabhi chorky ni jaunga apki daant sununga apka gussa sehlunga Lekin Sath Dunga hamesha or ik AP sensitive ho so MN hamesha apka khyal rakhunga apny dill Sy apka khyal rakhunga muuuwwaahhh Mera munnahh💞🫢💋🎀💝💓🫠🫂</p>
+        </div>
+    </section>
+
+    <!-- Question Section -->
+    <section id="question">
+        <h2 class="glow">Will you be my Valentine forever? 🥺💍</h2>
+        <button id="yes-btn" class="button">YES 💖</button>
+        <button id="no-btn" class="button">No 😅</button>
+    </section>
+
+    <!-- Celebration Overlay -->
+    <div id="celebration">
+        <h2 id="celebration-message" class="glow">You just made me the happiest man alive 🥹💖</h2>
+    </div>
+
+    <!-- Audio Controls -->
+    <div id="audio-controls">
+        <button id="play-btn">Play Peaceful Love Tune 🎶</button>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="https://cdn.freesoundslibrary.com/wp-content/uploads/2023/09/romantic-piano-and-strings.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Typewriter Effect
+        const typewriterText = "My mottuu kaki 💞💋🎀,";
+        let i = 0;
+        function typeWriter() {
+            if (i < typewriterText.length) {
+                document.getElementById("typewriter").innerHTML += typewriterText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 90);
+            }
+        }
+        window.onload = typeWriter;
+
+        // Countdown Timer
+        const valentinesDay = new Date("2026-02-14T00:00:00");
+        function updateCountdown() {
+            const now = new Date();
+            const diff = valentinesDay - now;
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000*60*60*24));
+                const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+                const seconds = Math.floor((diff % (1000*60)) / 1000);
+                document.getElementById("countdown").innerHTML = `Time until Valentine's: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById("countdown").innerHTML = "Happy Valentine's Day, meri jaan! 💖";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Flying lovely emojis – always visible background effect
+        const emojis = ['💖','💗','💕','😘','💋','🫶','✨','🌸','💞','🥰','💘','🎀'];
+
+        function createFlyingEmoji() {
+            const el = document.createElement('div');
+            el.classList.add('flying-emoji');
+
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            el.innerHTML = emoji;
+
+            // Random properties
+            const size = (Math.random() * 1.8 + 1.1) + 'rem';
+            el.style.fontSize = size;
+
+            const left = Math.random() * 100;
+            el.style.left = left + 'vw';
+
+            // Start from bottom
+            const bottomStart = Math.random() * 40 + 60;
+            el.style.bottom = '-' + bottomStart + 'vh';
+
+            // Random delay
+            const delay = Math.random() * 6 + 's';
+            el.style.animationDelay = delay;
+
+            // Random duration (longer = slower float)
+            const duration = Math.random() * 8 + 14; // 14–22 seconds
+            el.style.animationDuration = duration + 's';
+
+            // Sometimes add horizontal drift
+            if (Math.random() > 0.6) {
+                el.classList.add('drift');
+            }
+
+            document.body.appendChild(el);
+
+            // Clean up after animation finishes
+            setTimeout(() => {
+                if (el.parentNode) el.parentNode.removeChild(el);
+            }, (duration + 2) * 1000);
+        }
+
+        // Create flying emojis continuously
+        setInterval(createFlyingEmoji, 350); // ≈ every 0.35s → gentle constant flow
+
+        // No button escape
+        const noBtn = document.getElementById('no-btn');
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = Math.random() * 84 + 8 + 'vw';
+            noBtn.style.top = Math.random() * 84 + 8 + 'vh';
+        });
+        noBtn.addEventListener('touchstart', e => {
+            e.preventDefault();
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = Math.random() * 84 + 8 + 'vw';
+            noBtn.style.top = Math.random() * 84 + 8 + 'vh';
+        });
+
+        // YES → just show celebration message (no extra burst)
+        document.getElementById('yes-btn').addEventListener('click', () => {
+            document.getElementById('celebration').style.display = 'flex';
+        });
+
+        // Music control
+        const audio = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-btn');
+        audio.muted = true;
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.muted = false;
+                audio.play().catch(() => {});
+                playBtn.textContent = 'Pause Peaceful Love Tune 🎶';
+            } else {
+                audio.pause();
+                playBtn.textContent = 'Play Peaceful Love Tune 🎶';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
